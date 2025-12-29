@@ -1,0 +1,10 @@
+@import "src/assets/scss/colors";
+
+nav {
+    height: 50px;
+    background-color: $neutral00;
+    display: flex;
+    align-items: center;
+    margin-left: 101px;
+    margin-right: 101px;
+}
