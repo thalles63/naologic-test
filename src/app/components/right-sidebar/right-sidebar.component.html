@@ -1,0 +1,10 @@
+<div
+    class="sidebar-overlay"
+    [class.open]="isOpen()"
+    (click)="close()">
+    <div
+        class="sidebar-panel"
+        (click)="$event.stopPropagation()">
+        <ng-content></ng-content>
+    </div>
+</div>

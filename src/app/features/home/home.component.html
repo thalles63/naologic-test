@@ -1,6 +1,8 @@
 <div class="container">
     <h3>Work Orders</h3>
 
+    <app-timescale-selector (timescaleChange)="timeline.updateViewMode($event)"></app-timescale-selector>
+
     <app-timeline
         #timeline
         [workCenters]="workCenters()"

@@ -52,7 +52,10 @@
                             [class.first]="first">
                             <div class="row-background">
                                 @for (col of columns(); track $index) {
-                                    <div class="cell grid-cell"> </div>
+                                    <div
+                                        class="cell grid-cell"
+                                        (click)="createOrder()">
+                                    </div>
                                 }
                             </div>
 
@@ -61,7 +64,8 @@
                                     <div
                                         class="work-order-item"
                                         [ngStyle]="getItemStyle(wo)"
-                                        [title]="wo.data.name">
+                                        [title]="wo.data.name"
+                                        (click)="$event.stopPropagation(); editOrder(wo)">
                                         {{ wo.data.name }}
                                     </div>
                                 }
@@ -72,4 +76,10 @@
             </div>
         </div>
     </div>
+
+    <app-work-order-details
+        [workOrder]="selectedWorkOrder()"
+        (onSave)="onWorkOrderSave($event)"
+        (onClose)="onWorkOrderClose()">
+    </app-work-order-details>
 </div>

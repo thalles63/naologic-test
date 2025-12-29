@@ -1,0 +1,56 @@
+<app-right-sidebar (onClose)="cancel()">
+    <div class="header">
+        <div class="titles">
+            <h2>Work Order Details</h2>
+            <p>Specify the dates, name and status for this order</p>
+        </div>
+        <div class="actions">
+            <button
+                class="btn-cancel"
+                (click)="cancel()">
+                Cancel
+            </button>
+            <button
+                class="btn-primary"
+                (click)="save()">
+                Create
+            </button>
+        </div>
+    </div>
+
+    <div
+        class="form-content"
+        [formGroup]="form">
+        <div class="form-group">
+            <label>Work order name</label>
+            <input
+                type="text"
+                formControlName="name"
+                placeholder="Enter name" />
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select formControlName="status">
+                <option value="planned">Planned</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+                <option value="on-hold">On Hold</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Start Date</label>
+            <input
+                type="date"
+                formControlName="startDate" />
+        </div>
+
+        <div class="form-group">
+            <label>End Date</label>
+            <input
+                type="date"
+                formControlName="endDate" />
+        </div>
+    </div>
+</app-right-sidebar>

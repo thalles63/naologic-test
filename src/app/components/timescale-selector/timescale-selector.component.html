@@ -1,0 +1,19 @@
+<div class="timescale-selector">
+    <button
+        [class.active]="currentScale() === timescaleEnum.DAY"
+        (click)="setScale(timescaleEnum.DAY)">
+        Day
+    </button>
+
+    <button
+        [class.active]="currentScale() === timescaleEnum.WEEK"
+        (click)="setScale(timescaleEnum.WEEK)">
+        Week
+    </button>
+
+    <button
+        [class.active]="currentScale() === timescaleEnum.MONTH"
+        (click)="setScale(timescaleEnum.MONTH)">
+        Month
+    </button>
+</div>

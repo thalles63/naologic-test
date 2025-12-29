@@ -1,19 +1,24 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, input, model, signal } from "@angular/core";
+import { Component, computed, inject, input, model, signal } from "@angular/core";
 import { TimescaleEnum } from "../../shared/enums/timescale.enum";
 import { WorkCenterDocument } from "../../shared/models/work-center.interface";
 import { WorkOrderDocument } from "../../shared/models/work-order.interface";
+import { SidebarService } from "../right-sidebar/right-sidebar.service";
+import { WorkOrderDetailsComponent } from "../work-order-details/work-order-details.component";
 
 @Component({
     selector: "app-timeline",
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, WorkOrderDetailsComponent],
     templateUrl: "./timeline.component.html",
     styleUrl: "./timeline.component.scss"
 })
 export class TimelineComponent {
+    private readonly sidebarService = inject(SidebarService);
+
     public readonly workCenters = input<WorkCenterDocument[]>([]);
     public readonly workOrders = model<WorkOrderDocument[]>([]);
+    public readonly selectedWorkOrder = signal<WorkOrderDocument | null>(null);
     public readonly currentDate = signal(new Date());
     public readonly now = signal(new Date());
     public readonly viewMode = signal<TimescaleEnum>(TimescaleEnum.DAY);
@@ -171,5 +176,37 @@ export class TimelineComponent {
 
         const left = ((current - range.start.getTime()) / totalDuration) * 100;
         return `left: ${left}%`;
+    }
+
+    public editOrder(wo: WorkOrderDocument) {
+        this.selectedWorkOrder.set(wo);
+        this.sidebarService.open();
+    }
+
+    public createOrder() {
+        this.selectedWorkOrder.set(null);
+        this.sidebarService.open();
+    }
+
+    public onWorkOrderSave(workOrder: WorkOrderDocument) {
+        this.sidebarService.close();
+        this.selectedWorkOrder.set(null);
+
+        this.workOrders.update((wo) => {
+            if (workOrder.docId) {
+                const index = wo.findIndex((w) => w.docId === workOrder.docId);
+                if (index !== -1) {
+                    wo[index] = workOrder;
+                }
+            } else {
+                wo.push(workOrder);
+            }
+            return wo;
+        });
+    }
+
+    public onWorkOrderClose() {
+        this.sidebarService.close();
+        this.selectedWorkOrder.set(null);
     }
 }
