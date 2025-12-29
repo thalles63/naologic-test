@@ -1,14 +1,21 @@
 * {
     font-family: "Circular-Std", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    color: $typography-primary;
+    font-size: 14px;
+}
+
+body, html {
+    height: 100%;
 }
 
 h3 {
-    color: $neutral100;
     font-size: 24px;
     font-weight: 600;
 }
 
 .container {
+    height: calc(100% - 95px);
     margin-left: 101px;
+    margin-right: 45px;
     margin-top: 45px;
 }

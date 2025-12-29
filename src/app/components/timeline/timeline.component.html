@@ -1,0 +1,42 @@
+<div class="timeline-container">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <span>Work Center</span>
+        </div>
+        @for (workCenter of workCenters(); track $index; let first = $first) {
+            <div
+                class="workcenter-row"
+                [class.first]="first">
+                <span>{{ workCenter.data.name }}</span>
+            </div>
+        }
+    </div>
+
+    <div class="viewport">
+        <div class="canvas">
+            <div class="today-marker"> </div>
+
+            <div class="header-row">
+                <div class="cell header-cell"> Aug 2024 </div>
+                <div class="cell header-cell"> Sep 2024 </div>
+                <div class="cell header-cell"> Oct 2024 </div>
+                <div class="cell header-cell"> Nov 2024 </div>
+                <div class="cell header-cell"> Dec 2024 </div>
+                <div class="cell header-cell"> Jan 2025 </div>
+                <div class="cell header-cell"> Feb 2025 </div>
+                <div class="cell header-cell"> Mar 2025 </div>
+            </div>
+
+            <div class="data-row">
+                <div class="cell data-cell"></div>
+                <div class="cell data-cell"></div>
+                <div class="cell data-cell"></div>
+                <div class="cell data-cell"></div>
+                <div class="cell data-cell"></div>
+                <div class="cell data-cell"></div>
+                <div class="cell data-cell"></div>
+                <div class="cell data-cell"></div>
+            </div>
+        </div>
+    </div>
+</div>

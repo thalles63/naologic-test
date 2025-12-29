@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, input } from "@angular/core";
+import { WorkCenterDocument } from "../../shared/models/work-center.interface";
 
 @Component({
     selector: "app-timeline",
@@ -6,4 +7,6 @@ import { Component } from "@angular/core";
     templateUrl: "./timeline.component.html",
     styleUrl: "./timeline.component.scss"
 })
-export class TimelineComponent {}
+export class TimelineComponent {
+    public readonly workCenters = input<WorkCenterDocument[]>([]);
+}

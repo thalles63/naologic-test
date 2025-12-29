@@ -1,0 +1,90 @@
+@import "src/assets/scss/colors";
+
+.timeline-container {
+    margin-top: 24px;
+    border: 1px solid $borders;
+    height: calc(100% - 60px);
+    display: flex;
+}
+
+.sidebar {
+    flex: 0 0 380px;
+    border-right: 1px solid $borders;
+}
+
+.sidebar-header {
+    border-bottom: 1px solid $borders;
+    display: flex;
+    align-items: center;
+    height: 32px;
+
+    span {
+        padding-left: 32px;
+        line-height: 16px;
+        color: $typography-secondary;
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
+.workcenter-row {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding-left: 32px;
+    border-bottom: 1px solid $borders;
+    font-size: 14px;
+    font-weight: 500;
+
+    &.first {
+        margin-top: 12px;
+    }
+}
+
+.viewport {
+    flex-grow: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.canvas {
+    height: 100%;
+}
+
+.header-row {
+    width: 100%;
+    display: flex;
+
+    .header-cell {
+        border-bottom: 1px solid $borders;
+        line-height: 16px;
+        color: $typography-secondary;
+        font-size: 14px;
+        font-weight: 500;
+        flex: 0 0 115px;
+        justify-content: center;
+        height: 32px;
+        display: flex;
+        align-items: center;
+    }
+}
+.data-row {
+    width: 100%;
+    display: flex;
+    height: 100%;
+
+    .data-cell {
+        flex: 0 0 115px;
+        border-right: 1px solid $borders;
+        height: 100%;
+    }
+}
+
+.today-marker {
+    border: $borders-secondary 3px solid;
+    transform: rotate( 90deg );
+    position: absolute;
+    bottom: 0;
+    width: calc(100% + 47px);
+}
