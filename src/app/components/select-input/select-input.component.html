@@ -1,0 +1,21 @@
+<ng-select
+    [items]="items"
+    [bindLabel]="bindLabel"
+    [bindValue]="bindValue"
+    [placeholder]="placeholder"
+    [clearable]="clearable"
+    [(ngModel)]="value"
+    [disabled]="disabled"
+    (ngModelChange)="onModelChange($event)"
+    (blur)="onTouched()">
+    <ng-template
+        ng-label-tmp
+        let-item="item">
+        <ng-container *ngIf="labelTemplate; else defaultLabel">
+            <ng-container *ngTemplateOutlet="labelTemplate; context: { $implicit: item }"></ng-container>
+        </ng-container>
+        <ng-template #defaultLabel>
+            {{ item[bindLabel] }}
+        </ng-template>
+    </ng-template>
+</ng-select>

@@ -31,12 +31,21 @@
 
         <div class="form-group">
             <label>Status</label>
-            <select formControlName="status">
-                <option value="open">Open</option>
-                <option value="in-progress">In Progress</option>
-                <option value="complete">Complete</option>
-                <option value="blocked">Blocked</option>
-            </select>
+            <ng-template
+                #statusTemplate
+                let-item>
+                <div style="display: flex; align-items: center; gap: 8px">
+                    <app-status-badge [status]="item.value"></app-status-badge>
+                </div>
+            </ng-template>
+
+            <app-select-input
+                formControlName="status"
+                [items]="statusOptions"
+                bindLabel="label"
+                bindValue="value"
+                [labelTemplate]="statusTemplate">
+            </app-select-input>
         </div>
 
         <div class="form-group">

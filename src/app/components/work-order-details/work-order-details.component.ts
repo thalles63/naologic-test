@@ -6,11 +6,13 @@ import { WorkCenterDocument } from "../../shared/models/work-center.interface";
 import { WorkOrderDocument } from "../../shared/models/work-order.interface";
 import { RightSidebarComponent } from "../right-sidebar/right-sidebar.component";
 import { SidebarService } from "../right-sidebar/right-sidebar.service";
+import { SelectInputComponent } from "../select-input/select-input.component";
+import { StatusBadgeComponent } from "../status-badge/status-badge.component";
 
 @Component({
     selector: "app-work-order-details",
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, RightSidebarComponent],
+    imports: [CommonModule, ReactiveFormsModule, RightSidebarComponent, SelectInputComponent, StatusBadgeComponent],
     templateUrl: "./work-order-details.component.html",
     styleUrl: "./work-order-details.component.scss"
 })
@@ -34,6 +36,13 @@ export class WorkOrderDetailsComponent {
         endDate: ["", Validators.required],
         workCenterId: ["", Validators.required]
     });
+
+    public statusOptions = [
+        { value: StatusEnum.OPEN, label: "Open" },
+        { value: StatusEnum.IN_PROGRESS, label: "In Progress" },
+        { value: StatusEnum.COMPLETE, label: "Complete" },
+        { value: StatusEnum.BLOCKED, label: "Blocked" }
+    ];
 
     constructor() {
         effect(() => {
