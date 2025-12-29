@@ -4,6 +4,7 @@ import { StatusEnum } from "../../shared/enums/status.enum";
 import { TimescaleEnum } from "../../shared/enums/timescale.enum";
 import { WorkCenterDocument } from "../../shared/models/work-center.interface";
 import { WorkOrderDocument } from "../../shared/models/work-order.interface";
+import { ActionMenuComponent } from "../action-menu/action-menu.component";
 import { SidebarService } from "../right-sidebar/right-sidebar.service";
 import { StatusBadgeComponent } from "../status-badge/status-badge.component";
 import { WorkOrderDetailsComponent } from "../work-order-details/work-order-details.component";
@@ -11,7 +12,7 @@ import { WorkOrderDetailsComponent } from "../work-order-details/work-order-deta
 @Component({
     selector: "app-timeline",
     standalone: true,
-    imports: [CommonModule, WorkOrderDetailsComponent, StatusBadgeComponent],
+    imports: [CommonModule, WorkOrderDetailsComponent, StatusBadgeComponent, ActionMenuComponent],
     templateUrl: "./timeline.component.html",
     styleUrl: "./timeline.component.scss"
 })
@@ -75,7 +76,6 @@ export class TimelineComponent {
         const end = new Date(date);
         end.setDate(end.getDate() + 6);
 
-        // Helper to format "28 Dec"
         const fmt = (d: Date) => {
             const day = d.getDate();
             const month = d.toLocaleString("en-US", { month: "short" });
@@ -301,7 +301,7 @@ export class TimelineComponent {
             docType: "workOrder",
             data: {
                 workCenterId: workCenterId,
-                status: "open",
+                status: StatusEnum.OPEN,
                 startDate: [startDate.getFullYear(), String(startDate.getMonth() + 1).padStart(2, "0"), String(startDate.getDate()).padStart(2, "0")].join("-"),
                 endDate: ""
             }
@@ -331,5 +331,9 @@ export class TimelineComponent {
     public onWorkOrderClose() {
         this.sidebarService.close();
         this.selectedWorkOrder.set(null);
+    }
+
+    public deleteOrder(workOrder: WorkOrderDocument) {
+        this.workOrders.update((orders) => orders.filter((o) => o.docId !== workOrder.docId));
     }
 }

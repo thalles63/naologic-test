@@ -76,18 +76,24 @@
                                 @for (wo of getWorkOrdersForCenter(workCenter.docId); track wo.docId) {
                                     <div
                                         class="work-order-item"
-                                        [title]="wo.data.name"
                                         [style]="getItemPosition(wo)"
                                         [class.status-open]="wo.data.status === statusEnum.OPEN"
                                         [class.status-in-progress]="wo.data.status === statusEnum.IN_PROGRESS"
                                         [class.status-complete]="wo.data.status === statusEnum.COMPLETE"
                                         [class.status-blocked]="wo.data.status === statusEnum.BLOCKED"
-                                        (click)="$event.stopPropagation(); editOrder(wo)">
-                                        {{ wo.data.name }}
-                                        <app-status-badge
-                                            class="mr-2"
-                                            [status]="wo.data.status">
-                                        </app-status-badge>
+                                        (click)="$event.stopPropagation()">
+                                        <div class="wo-content">
+                                            <span class="wo-title">{{ wo.data.name }}</span>
+                                            <app-status-badge
+                                                class="mr-2"
+                                                [status]="wo.data.status">
+                                            </app-status-badge>
+                                        </div>
+                                        <app-action-menu
+                                            class="action-menu"
+                                            (edit)="editOrder(wo)"
+                                            (delete)="deleteOrder(wo)">
+                                        </app-action-menu>
                                     </div>
                                 }
                             </div>

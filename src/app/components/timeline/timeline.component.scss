@@ -140,6 +140,10 @@
             background-color: rgba(238, 240, 255, 1);
         }
     }
+
+    &:hover {
+        z-index: 50;
+    }
 }
 
 .row-background {
@@ -156,7 +160,9 @@
         border-right: 0;
         height: 100%;
         cursor: pointer;
-        position: relative; // For positioning the pseudo-element/border if needed, but border is simple.
+        position: relative;
+        height: 36px;
+        margin-top: 6px;
 
         &:last-child {
             border-right: none;
@@ -167,8 +173,33 @@
             height: 38px;
             border-radius: 8px;
             background-color: rgba(101, 112, 255, 0.1);
-            margin-top: 5px; // To center it vertically (48px - 38px) / 2 = 5px
-            // Adjusting height effectively might need box-sizing or margin
+            margin-top: 5px;
+
+            &::after {
+                content: "Click to add dates";
+                position: absolute;
+                top: -31px;
+                left: 50%;
+                transform: translateX(-50%);
+
+                width: 130px;
+                height: 26px;
+                box-shadow:
+                    rgba(200, 207, 233, 1) 0 2px 4px -2px,
+                    rgba(230, 235, 240, 1) 0 0 16px -8px;
+                border-radius: 8px;
+                background-color: rgba(104, 113, 150, 1);
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                color: #fff;
+                font-size: 14px;
+                font-weight: 500;
+                z-index: 100;
+                pointer-events: none;
+            }
         }
     }
 }
@@ -206,25 +237,55 @@
 
 .work-order-item {
     position: absolute;
-    top: 6px;
-    height: 36px;
+    top: 5px;
+    height: 38px;
     border-radius: 4px;
     font-size: 12px;
     display: flex;
     align-items: center;
-    padding: 0 8px;
-    overflow: hidden;
+    padding: 0 4px 0 8px;
+    overflow: visible;
+
     white-space: nowrap;
-    justify-content: space-between;
-    padding-right: 36px;
-    cursor: pointer;
     pointer-events: auto;
 
     font-size: 14px;
     font-weight: 500;
 
+    &:hover {
+        z-index: 20;
+    }
+
+    .wo-content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        margin-right: 4px;
+        min-width: 0;
+
+        .wo-title {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-right: 8px;
+        }
+    }
+
+    .action-menu {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        flex-shrink: 0;
+        z-index: 30;
+    }
+
+    &:hover .action-menu {
+        opacity: 1;
+    }
+
     &.status-open {
-        background-color: rgba(229, 244, 255, 1);
+        background-color: rgb(216 238 239);
         box-shadow: rgba(200, 230, 255, 1) 0 0 0 1px;
     }
 
@@ -259,7 +320,7 @@
     position: absolute;
     top: 0;
     transform: translateX(-50%);
-    z-index: 11;
+    z-index: 500;
     pointer-events: none;
     background-color: rgba(212, 215, 255, 1);
     height: 22px;

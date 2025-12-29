@@ -1,0 +1,26 @@
+<div
+    class="menu-container"
+    (click)="$event.stopPropagation()">
+    <button
+        class="menu-trigger"
+        (click)="toggleMenu()">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </button>
+
+    @if (isOpen()) {
+        <div class="menu-dropdown">
+            <div
+                class="menu-item"
+                (click)="onEditClick()">
+                <span>Edit</span>
+            </div>
+            <div
+                class="menu-item delete"
+                (click)="onDeleteClick()">
+                <span>Delete</span>
+            </div>
+        </div>
+    }
+</div>
