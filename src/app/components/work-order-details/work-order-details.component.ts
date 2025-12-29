@@ -1,8 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { Component, effect, inject, input, output } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { StatusEnum } from "../../shared/enums/status.enum";
 import { WorkCenterDocument } from "../../shared/models/work-center.interface";
-import { WorkOrderDocument, WorkOrderStatus } from "../../shared/models/work-order.interface";
+import { WorkOrderDocument } from "../../shared/models/work-order.interface";
 import { RightSidebarComponent } from "../right-sidebar/right-sidebar.component";
 import { SidebarService } from "../right-sidebar/right-sidebar.service";
 
@@ -28,7 +29,7 @@ export class WorkOrderDetailsComponent {
 
     public readonly form = this.fb.group({
         name: ["", Validators.required],
-        status: ["planned" as WorkOrderStatus | null, Validators.required],
+        status: [StatusEnum.OPEN, Validators.required],
         startDate: ["", Validators.required],
         endDate: ["", Validators.required],
         workCenterId: ["", Validators.required]
@@ -51,13 +52,13 @@ export class WorkOrderDetailsComponent {
                 const dateStr = init.date.toISOString().split("T")[0];
                 this.form.patchValue({
                     name: "",
-                    status: "planned",
+                    status: StatusEnum.OPEN,
                     startDate: dateStr,
                     endDate: dateStr,
                     workCenterId: init.workCenterId
                 });
             } else {
-                this.form.reset({ status: "planned" });
+                this.form.reset({ status: StatusEnum.OPEN });
             }
         });
     }

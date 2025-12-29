@@ -1,0 +1,31 @@
+.badge {
+    font-size: 14px;
+    height: 22px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 8px;
+    font-weight: 500;
+    text-transform: capitalize;
+    white-space: nowrap;
+
+    &.open {
+        background-color: rgba(204, 235, 255, 1);
+        color: rgba(0, 85, 175, 1);
+    }
+
+    &.in-progress {
+        background-color: rgba(214, 216, 255, 1);
+        color: rgba(62, 64, 219, 1);
+    }
+
+    &.blocked {
+        background-color: rgba(252, 238, 181, 1);
+        color: rgba(177, 54, 0, 1);
+    }
+
+    &.complete {
+        background-color: rgba(225, 255, 204, 1);
+        color: rgba(8, 162, 104, 1);
+    }
+}

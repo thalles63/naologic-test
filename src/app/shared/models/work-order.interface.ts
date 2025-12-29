@@ -1,12 +1,12 @@
-export type WorkOrderStatus = 'planned' | 'in-progress' | 'completed' | 'on-hold';
+import { StatusEnum } from "../enums/status.enum";
 
 export interface WorkOrderDocument {
     docId: string;
-    docType: 'workOrder';
+    docType: "workOrder";
     data: {
         name: string;
         workCenterId: string;
-        status: WorkOrderStatus;
+        status: StatusEnum;
         startDate: string;
         endDate: string;
     };

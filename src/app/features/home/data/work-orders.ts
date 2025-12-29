@@ -1,3 +1,4 @@
+import { StatusEnum } from "../../../shared/enums/status.enum";
 import { WorkOrderDocument } from "../../../shared/models/work-order.interface";
 
 export const WorkOrdersData: WorkOrderDocument[] = [
@@ -7,7 +8,7 @@ export const WorkOrdersData: WorkOrderDocument[] = [
         data: {
             name: "WO-101 Extrusion",
             workCenterId: "b5ff12fa-dff6-42f0-a560-22859da5e31e",
-            status: "in-progress",
+            status: StatusEnum.IN_PROGRESS,
             startDate: "2025-12-28",
             endDate: "2025-12-30"
         }
@@ -18,7 +19,7 @@ export const WorkOrdersData: WorkOrderDocument[] = [
         data: {
             name: "WO-102 CNC Long",
             workCenterId: "1b547b66-2b4c-440a-81ff-3ab20f5579e7",
-            status: "planned",
+            status: StatusEnum.OPEN,
             startDate: "2025-12-20",
             endDate: "2026-01-02"
         }
@@ -29,7 +30,7 @@ export const WorkOrdersData: WorkOrderDocument[] = [
         data: {
             name: "WO-103 Assembly",
             workCenterId: "d1cb3ff2-1acd-4591-9718-b83b5da1e4a9",
-            status: "completed",
+            status: StatusEnum.COMPLETE,
             startDate: "2025-12-29",
             endDate: "2025-12-30"
         }
@@ -40,7 +41,7 @@ export const WorkOrdersData: WorkOrderDocument[] = [
         data: {
             name: "WO-104 Extrusion Next",
             workCenterId: "b5ff12fa-dff6-42f0-a560-22859da5e31e",
-            status: "planned",
+            status: StatusEnum.OPEN,
             startDate: "2026-01-02",
             endDate: "2026-01-05"
         }
@@ -51,7 +52,7 @@ export const WorkOrdersData: WorkOrderDocument[] = [
         data: {
             name: "WO-105 QC Check",
             workCenterId: "96639312-d902-496e-8ac6-2959c3f1e0bc",
-            status: "on-hold",
+            status: StatusEnum.BLOCKED,
             startDate: "2025-12-29",
             endDate: "2025-12-30"
         }
@@ -62,7 +63,7 @@ export const WorkOrdersData: WorkOrderDocument[] = [
         data: {
             name: "WO-106 Packaging Batch",
             workCenterId: "9c6059ce-dc6d-4ac4-9d76-672b5da90e91",
-            status: "planned",
+            status: StatusEnum.OPEN,
             startDate: "2025-12-30",
             endDate: "2026-01-10"
         }
@@ -73,7 +74,7 @@ export const WorkOrdersData: WorkOrderDocument[] = [
         data: {
             name: "WO-107 blablal",
             workCenterId: "9c6059ce-dc6d-4ac4-9d76-672b5da90e91",
-            status: "planned",
+            status: StatusEnum.OPEN,
             startDate: "2025-11-30",
             endDate: "2025-12-10"
         }

@@ -13,7 +13,10 @@
             @for (workCenter of workCenters(); track workCenter.docId; let first = $first) {
                 <div
                     class="workcenter-row"
-                    [class.first]="first">
+                    [class.first]="first"
+                    [class.hovered]="hoveredWorkCenterId() === workCenter.docId"
+                    (mouseenter)="hoveredWorkCenterId.set(workCenter.docId)"
+                    (mouseleave)="hoveredWorkCenterId.set(null)">
                     <span>{{ workCenter.data.name }}</span>
                 </div>
             }
@@ -27,7 +30,7 @@
                             @if (viewMode() === timescaleEnum.DAY) {
                                 {{ col | date: "EEE dd" }}
                             } @else if (viewMode() === timescaleEnum.WEEK) {
-                                W{{ col | date: "w" }}
+                                {{ getWeekHeaderLabel(col) }}
                             } @else {
                                 {{ col | date: "MMM yyyy" }}
                             }
@@ -43,18 +46,28 @@
                     </div>
 
                     <div
-                        class="today-marker"
-                        [style]="getTodayPosition()"></div>
+                        class="today-line"
+                        [style]="todayPosition()">
+                    </div>
+
+                    <div
+                        class="today-badge"
+                        [style]="todayBadgePosition()">
+                        {{ todayLabel() }}
+                    </div>
 
                     @for (workCenter of workCenters(); track workCenter.docId; let first = $first) {
                         <div
                             class="data-row"
-                            [class.first]="first">
+                            [class.first]="first"
+                            [class.hovered]="hoveredWorkCenterId() === workCenter.docId"
+                            (mouseenter)="hoveredWorkCenterId.set(workCenter.docId)"
+                            (mouseleave)="hoveredWorkCenterId.set(null)">
                             <div class="row-background">
                                 @for (col of columns(); track $index) {
                                     <div
                                         class="cell grid-cell"
-                                        (click)="createOrder()">
+                                        (click)="createOrder(workCenter.docId, col)">
                                     </div>
                                 }
                             </div>
@@ -63,10 +76,18 @@
                                 @for (wo of getWorkOrdersForCenter(workCenter.docId); track wo.docId) {
                                     <div
                                         class="work-order-item"
-                                        [ngStyle]="getItemStyle(wo)"
                                         [title]="wo.data.name"
+                                        [style]="getItemPosition(wo)"
+                                        [class.status-open]="wo.data.status === statusEnum.OPEN"
+                                        [class.status-in-progress]="wo.data.status === statusEnum.IN_PROGRESS"
+                                        [class.status-complete]="wo.data.status === statusEnum.COMPLETE"
+                                        [class.status-blocked]="wo.data.status === statusEnum.BLOCKED"
                                         (click)="$event.stopPropagation(); editOrder(wo)">
                                         {{ wo.data.name }}
+                                        <app-status-badge
+                                            class="mr-2"
+                                            [status]="wo.data.status">
+                                        </app-status-badge>
                                     </div>
                                 }
                             </div>
@@ -79,6 +100,7 @@
 
     <app-work-order-details
         [workOrder]="selectedWorkOrder()"
+        [initialData]="newOrderData()"
         (onSave)="onWorkOrderSave($event)"
         (onClose)="onWorkOrderClose()">
     </app-work-order-details>

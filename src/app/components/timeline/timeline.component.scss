@@ -77,6 +77,10 @@
     &.first {
         margin-top: 12px;
     }
+
+    &.hovered {
+        background-color: rgba(250, 251, 253, 1);
+    }
 }
 
 .viewport {
@@ -131,6 +135,11 @@
     &.first {
         margin-top: 12px;
     }
+    &.hovered {
+        .row-background {
+            background-color: rgba(238, 240, 255, 1);
+        }
+    }
 }
 
 .row-background {
@@ -146,9 +155,20 @@
         flex: 1;
         border-right: 0;
         height: 100%;
+        cursor: pointer;
+        position: relative; // For positioning the pseudo-element/border if needed, but border is simple.
 
         &:last-child {
             border-right: none;
+        }
+
+        &:hover {
+            border: rgba(195, 199, 255, 1) 1px solid;
+            height: 38px;
+            border-radius: 8px;
+            background-color: rgba(101, 112, 255, 0.1);
+            margin-top: 5px; // To center it vertically (48px - 38px) / 2 = 5px
+            // Adjusting height effectively might need box-sizing or margin
         }
     }
 }
@@ -180,15 +200,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 2;
     pointer-events: none;
 }
 
 .work-order-item {
     position: absolute;
-    top: 8px;
-    height: 32px;
-    background: rgba(237, 238, 255, 1);
+    top: 6px;
+    height: 36px;
     border-radius: 4px;
     font-size: 12px;
     display: flex;
@@ -196,30 +215,61 @@
     padding: 0 8px;
     overflow: hidden;
     white-space: nowrap;
+    justify-content: space-between;
+    padding-right: 36px;
     cursor: pointer;
     pointer-events: auto;
-    box-shadow: rgba(222, 224, 255, 1) 0 0 0 1px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    &.status-open {
+        background-color: rgba(229, 244, 255, 1);
+        box-shadow: rgba(200, 230, 255, 1) 0 0 0 1px;
+    }
+
+    &.status-in-progress {
+        background-color: rgba(237, 238, 255, 1);
+        box-shadow: rgba(222, 224, 255, 1) 0 0 0 1px;
+    }
+
+    &.status-blocked {
+        background-color: rgba(255, 252, 241, 1);
+        box-shadow: rgba(255, 245, 207, 1) 0 0 0 1px;
+    }
+
+    &.status-complete {
+        background-color: rgba(248, 255, 243, 1);
+        box-shadow: rgba(209, 250, 179, 1) 0 0 0 1px;
+    }
 }
 
-.today-marker {
+.today-line {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 2px;
     background-color: $borders-secondary;
-    z-index: 10;
+    z-index: 1;
     pointer-events: none;
+    transform: translateX(-50%);
+}
 
-    &::after {
-        content: "TODAY";
-        position: absolute;
-        top: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #f44336;
-        color: #fff;
-        font-size: 10px;
-        padding: 2px 4px;
-        border-radius: 4px;
-    }
+.today-badge {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 11;
+    pointer-events: none;
+    background-color: rgba(212, 215, 255, 1);
+    height: 22px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(62, 64, 219, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    white-space: nowrap;
 }
