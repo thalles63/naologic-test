@@ -297,7 +297,7 @@ export class TimelineComponent {
 
     public createOrder(workCenterId: string, startDate: Date) {
         const order = <WorkOrderDocument>{
-            docId: "string",
+            docId: "",
             docType: "workOrder",
             data: {
                 workCenterId: workCenterId,
@@ -316,15 +316,14 @@ export class TimelineComponent {
         this.selectedWorkOrder.set(null);
 
         this.workOrders.update((wo) => {
-            if (workOrder.docId) {
-                const index = wo.findIndex((w) => w.docId === workOrder.docId);
-                if (index !== -1) {
-                    wo[index] = workOrder;
-                }
+            const index = wo.findIndex((w) => w.docId === workOrder.docId);
+            if (index !== -1) {
+                const newWo = [...wo];
+                newWo[index] = workOrder;
+                return newWo;
             } else {
-                wo.push(workOrder);
+                return [...wo, workOrder];
             }
-            return wo;
         });
     }
 

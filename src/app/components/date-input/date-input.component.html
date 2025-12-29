@@ -1,0 +1,13 @@
+<div class="input-group">
+    <input
+        class="form-control"
+        [placeholder]="placeholder"
+        name="dp"
+        [(ngModel)]="value"
+        (ngModelChange)="onChange($event)"
+        ngbDatepicker
+        #d="ngbDatepicker"
+        [container]="'body'"
+        (click)="d.toggle()"
+        [disabled]="disabled" />
+</div>

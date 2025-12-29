@@ -107,6 +107,8 @@
     <app-work-order-details
         [workOrder]="selectedWorkOrder()"
         [initialData]="newOrderData()"
+        [workCenters]="workCenters()"
+        [allWorkOrders]="workOrders()"
         (onSave)="onWorkOrderSave($event)"
         (onClose)="onWorkOrderClose()">
     </app-work-order-details>

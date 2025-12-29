@@ -1,0 +1,137 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(224, 224, 224, 1) !important; // Match local variable for consistency or specific color
+    font-size: 14px;
+    color: #333;
+    height: 38px;
+    box-shadow:
+        rgba(216, 220, 235, 1) 0 0 0 1px,
+        rgba(200, 207, 233, 1) 0 1.5px 3px -1.5px,
+        rgba(216, 220, 235, 1) 0 1px 0.5px -1px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 1);
+
+    // Remove default border since we handle it with shadow/border combined
+    border: 0;
+
+    &:focus {
+        outline: none;
+        box-shadow: rgba(170, 175, 255, 1) 0 0 0 2px;
+    }
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 12px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    &:hover {
+        color: #333;
+    }
+}
+
+::ng-deep {
+    ngb-datepicker {
+        border: 0 !important;
+        box-shadow:
+            rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+            rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        border-radius: 8px !important;
+        font-family: inherit;
+        background-color: #fff;
+        padding: 10px;
+
+        .ngb-dp-header {
+            background-color: #fff !important;
+            border-bottom: 0 !important;
+            padding-top: 0 !important;
+
+            .ngb-dp-arrow-btn {
+                color: #555;
+                &:hover {
+                    background-color: #f5f5f5;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .ngb-dp-content {
+            .ngb-dp-weekdays {
+                border-bottom: 0 !important;
+                background-color: #fff !important;
+
+                .ngb-dp-weekday {
+                    color: #888;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 0.85rem;
+                }
+            }
+
+            .ngb-dp-day,
+            .ngb-dp-weekday,
+            .ngb-dp-week-number {
+                width: 36px;
+                height: 36px;
+                line-height: 36px;
+                text-align: center;
+                font-style: normal;
+            }
+
+            .btn-light {
+                background-color: #fff;
+                color: #333;
+                border-radius: 50%;
+
+                &:hover {
+                    background-color: #f0f4ff;
+                    color: #2196f3;
+                }
+
+                &.text-muted {
+                    color: #ccc !important;
+                }
+            }
+
+            .bg-primary {
+                background-color: #2196f3 !important;
+                color: #fff !important;
+                border-radius: 50%;
+                box-shadow: 0 2px 5px rgba(33, 150, 243, 0.3);
+
+                &:hover {
+                    background-color: #1976d2 !important;
+                }
+            }
+
+            .ngb-dp-today {
+                // circle for today if not selected
+                &:not(.bg-primary) {
+                    border: 1px solid #2196f3;
+                    background: transparent;
+                }
+            }
+        }
+    }
+}

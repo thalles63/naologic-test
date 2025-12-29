@@ -1,3 +1,12 @@
 @import "./reset";
 @import "./colors";
 @import "./default";
+@import "ngx-toastr/toastr";
+
+/* Toastr Overrides */
+#toast-container > div {
+    .toast-title,
+    .toast-message {
+        color: #ffffff !important;
+    }
+}
