@@ -1,27 +1,51 @@
-# NaologicTest
+# Naologic Test - Manufacturing Timeline
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+A dynamic, interactive Gantt-chart style timeline application built with **Angular 18**. This application allows users to view, create, and manage Work Orders across different Work Centers with efficient state management and a modern UI.
 
-## Development server
+## How to Run
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1.  **Install Dependencies**:
 
-## Code scaffolding
+    ```bash
+    npm install
+    ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2.  **Start the Development Server**:
 
-## Build
+    ```bash
+    npm start
+    ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Running unit tests
+3.  **Build for Production**:
+    ```bash
+    npm run build
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 💡 Approach & Architecture
 
-## Running end-to-end tests
+My main concern was to create the complete timeline functionality. I started with the basic structure and then added the features one by one. The tricky part was to create the timeline grid and the work orders on it. But in the end, I was able to create a timeline that is both functional and visually accurate to the example.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### **State Management with Angular Signals**
 
-## Further help
+I chose **Angular Signals** (`signal`, `computed`, `effect`) as the core reactivity model.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+-   **Why?** Signals provide granular updates, reducing unnecessary change detection cycles compared to `Zone.js` alone.
+-   **Usage:** The timeline's grid calculations, today's marker position, and filtered lists are all derived using `computed` signals. This ensures high performance even with many DOM elements on the timeline.
+
+### **Component Design**
+
+-   **TimelineComponent**: The "smart" orchestrator. It handles the grid rendering, event propagation, and communication with the sidebar service.
+-   **Reusability**:
+    -   `RightSidebarComponent`: A generic wrapper for any side-panel content.
+    -   `DateInputComponent`: A wrapper around `ng-bootstrap`'s datepicker to standardize ISO string handling and UI styling.
+    -   `SelectInputComponent`: A wrapper around `ng-select` for consistent form control behavior.
+
+## 🛠️ Extra Libraries Used
+
+| Library        | Purpose         | Why?                                                                                                |
+| :------------- | :-------------- | :-------------------------------------------------------------------------------------------------- |
+| **ngx-toastr** | Notifications   | Simple, non-blocking toast notifications to inform users of error states (e.g., validation errors). |
+| **prettier**   | Code Formatting | Ensures consistent code style and formatting.                                                       |
+| **eslint**     | Code Quality    | Ensures consistent code quality and style.                                                          |
