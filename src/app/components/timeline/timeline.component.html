@@ -1,41 +1,74 @@
 <div class="timeline-container">
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <span>Work Center</span>
+    <div
+        class="timeline-content"
+        (wheel)="onWheel($event)"
+        (mousedown)="onMouseDown($event)"
+        (mousemove)="onMouseMove($event)"
+        (mouseup)="onMouseUp($event)"
+        (mouseleave)="onMouseLeave()">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <span>Work Center</span>
+            </div>
+            @for (workCenter of workCenters(); track workCenter.docId; let first = $first) {
+                <div
+                    class="workcenter-row"
+                    [class.first]="first">
+                    <span>{{ workCenter.data.name }}</span>
+                </div>
+            }
         </div>
-        @for (workCenter of workCenters(); track $index; let first = $first) {
-            <div
-                class="workcenter-row"
-                [class.first]="first">
-                <span>{{ workCenter.data.name }}</span>
-            </div>
-        }
-    </div>
 
-    <div class="viewport">
-        <div class="canvas">
-            <div class="today-marker"> </div>
+        <div class="viewport">
+            <div class="canvas">
+                <div class="header-row">
+                    @for (col of columns(); track $index) {
+                        <div class="cell header-cell">
+                            @if (viewMode() === timescaleEnum.DAY) {
+                                {{ col | date: "EEE dd" }}
+                            } @else if (viewMode() === timescaleEnum.WEEK) {
+                                W{{ col | date: "w" }}
+                            } @else {
+                                {{ col | date: "MMM yyyy" }}
+                            }
+                        </div>
+                    }
+                </div>
 
-            <div class="header-row">
-                <div class="cell header-cell"> Aug 2024 </div>
-                <div class="cell header-cell"> Sep 2024 </div>
-                <div class="cell header-cell"> Oct 2024 </div>
-                <div class="cell header-cell"> Nov 2024 </div>
-                <div class="cell header-cell"> Dec 2024 </div>
-                <div class="cell header-cell"> Jan 2025 </div>
-                <div class="cell header-cell"> Feb 2025 </div>
-                <div class="cell header-cell"> Mar 2025 </div>
-            </div>
+                <div class="grid-content">
+                    <div class="background-grid">
+                        @for (col of columns(); track $index) {
+                            <div class="bg-column"></div>
+                        }
+                    </div>
 
-            <div class="data-row">
-                <div class="cell data-cell"></div>
-                <div class="cell data-cell"></div>
-                <div class="cell data-cell"></div>
-                <div class="cell data-cell"></div>
-                <div class="cell data-cell"></div>
-                <div class="cell data-cell"></div>
-                <div class="cell data-cell"></div>
-                <div class="cell data-cell"></div>
+                    <div
+                        class="today-marker"
+                        [style]="getTodayPosition()"></div>
+
+                    @for (workCenter of workCenters(); track workCenter.docId; let first = $first) {
+                        <div
+                            class="data-row"
+                            [class.first]="first">
+                            <div class="row-background">
+                                @for (col of columns(); track $index) {
+                                    <div class="cell grid-cell"> </div>
+                                }
+                            </div>
+
+                            <div class="row-items">
+                                @for (wo of getWorkOrdersForCenter(workCenter.docId); track wo.docId) {
+                                    <div
+                                        class="work-order-item"
+                                        [ngStyle]="getItemStyle(wo)"
+                                        [title]="wo.data.name">
+                                        {{ wo.data.name }}
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>

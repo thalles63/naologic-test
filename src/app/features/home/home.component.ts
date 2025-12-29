@@ -2,6 +2,7 @@ import { Component, signal } from "@angular/core";
 import { TimelineComponent } from "../../components/timeline/timeline.component";
 import { TimescaleSelectorComponent } from "../../components/timescale-selector/timescale-selector.component";
 import { WorkcentersData } from "./data/work-centers";
+import { WorkOrdersData } from "./data/work-orders";
 
 @Component({
     standalone: true,
@@ -10,4 +11,5 @@ import { WorkcentersData } from "./data/work-centers";
 })
 export class HomeComponent {
     protected workCenters = signal(WorkcentersData);
+    protected workOrders = signal(WorkOrdersData);
 }

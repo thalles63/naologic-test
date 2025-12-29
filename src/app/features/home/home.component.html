@@ -1,7 +1,9 @@
 <div class="container">
     <h3>Work Orders</h3>
 
-    <app-timescale-selector></app-timescale-selector>
-
-    <app-timeline [workCenters]="workCenters()"></app-timeline>
+    <app-timeline
+        #timeline
+        [workCenters]="workCenters()"
+        [(workOrders)]="workOrders">
+    </app-timeline>
 </div>
